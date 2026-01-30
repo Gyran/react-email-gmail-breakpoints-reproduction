@@ -14,7 +14,9 @@ In **version 0.5.7**, media queries are generated correctly and work in Gmail de
 @media(min-width:480px){.sm_bg-blue-500{background-color:rgb(59,130,246) !important}}
 ```
 
-In **version 1.0.6**, media queries are nested inside selectors instead of wrapping them:
+In **version 1.0.6**, two changes occur:
+1. Media queries are nested inside selectors instead of wrapping them
+2. The media query syntax changes from `min-width:480px` to `width>=480px` (Media Queries Level 4 syntax)
 
 ```css
 .sm_block{@media (width>=480px){display:block!important}}
@@ -22,7 +24,7 @@ In **version 1.0.6**, media queries are nested inside selectors instead of wrapp
 .sm_bg-blue-500{@media (width>=480px){background-color:rgb(43,127,255)!important}}
 ```
 
-**Gmail desktop does not support nested media queries** (see [Can I email @media](https://www.caniemail.com/features/css-at-media/)), causing media queries to be ignored and breaking responsive behavior. Other email clients (Apple Mail, Spark) do support nested media queries, so they work correctly.
+**Gmail desktop likely does not support the `width>=` Media Queries Level 4 syntax**, causing media queries to be ignored and breaking responsive behavior. While Gmail also doesn't support nested media queries, the primary issue appears to be the unsupported `width>=` syntax rather than the nesting structure. Other email clients (Apple Mail, Spark) support both nested media queries and the newer syntax, so they work correctly.
 
 ## Visual Evidence
 
@@ -56,7 +58,7 @@ In **version 1.0.6**, media queries are nested inside selectors instead of wrapp
 
 ### Other Email Clients
 
-**Important**: Version 1.0.6's nested media query syntax works correctly in other email clients that support nested media queries, demonstrating that this is a Gmail-specific limitation:
+**Important**: Version 1.0.6's media query syntax (both nesting and `width>=` syntax) works correctly in other email clients that support these features, demonstrating that this is a Gmail-specific limitation:
 
 **Apple Mail Desktop (0.5.7):**
 ![0.5.7 Apple Desktop](images/0.5.7-apple-desktop.png)
@@ -104,13 +106,18 @@ TO_EMAIL=your_test_email@example.com
 
 The generated HTML files show the CSS difference:
 
-- [`raw/0.5.7-px-html.txt`](raw/0.5.7-px-html.txt) - Contains CSS media queries that wrap selectors (Gmail-compatible)
-- [`raw/1.0.6-px-html.txt`](raw/1.0.6-px-html.txt) - Contains nested media queries (not supported in Gmail)
+- [`raw/0.5.7-px-html.txt`](raw/0.5.7-px-html.txt) - Contains CSS media queries using `min-width` syntax that wrap selectors (Gmail-compatible)
+- [`raw/1.0.6-px-html.txt`](raw/1.0.6-px-html.txt) - Contains nested media queries using `width>=` Media Queries Level 4 syntax (not supported in Gmail)
 
 You can inspect these raw email HTML files to see the exact CSS output differences between the two versions.
 
 ## Root Cause
 
-The issue appears to be in how `@react-email/tailwind` generates CSS in version 1.0.6. The media query syntax is reversed - instead of wrapping selectors inside media queries, selectors are wrapping media queries (nested media queries).
+The issue appears to be in how `@react-email/tailwind` generates CSS in version 1.0.6. Two changes occur:
 
-**Gmail desktop does not support nested media queries** (see [Can I email @media](https://www.caniemail.com/features/css-at-media/)), causing media queries to fail only in Gmail. Other email clients that support nested media queries (Apple Mail, Spark) work correctly.
+1. **Media query syntax change**: The syntax changes from `min-width:480px` (traditional syntax) to `width>=480px` (Media Queries Level 4 syntax)
+2. **Nesting structure change**: Media queries are nested inside selectors instead of wrapping them
+
+**The primary issue is likely the `width>=` Media Queries Level 4 syntax**, which Gmail desktop does not support. While Gmail also doesn't support nested media queries, the `width>=` syntax is the more likely culprit since it's a newer CSS feature that email clients are slower to adopt.
+
+Gmail supports traditional media query syntax like `min-width` (see [Gmail CSS Support](https://developers.google.com/gmail/design/css)), but there's no evidence that it supports the newer `width>=` syntax. This causes media queries to fail only in Gmail. Other email clients that support both nested media queries and Media Queries Level 4 syntax (Apple Mail, Spark) work correctly.
