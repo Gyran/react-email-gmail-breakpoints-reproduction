@@ -1,0 +1,18 @@
+----_NmP-68bc332d705074ef-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html dir=3D"ltr" lang=3D"en"=
+><head><meta content=3D"text/html; charset=3DUTF-8" http-equiv=3D"Content-T=
+ype"/><meta name=3D"x-apple-disable-message-reformatting"/><style>@media(mi=
+n-width:480px){.sm_hidden{display:none !important}}@media(min-width:480px){=
+.sm_block{display:block !important}}@media(min-width:480px){.sm_bg-blue-500=
+{background-color:rgb(59,130,246) !important}}</style></head><body><!--$-->=
+<!--html--><!--head--><!--body--><table border=3D"0" width=3D"100%" cellPad=
+ding=3D"0" cellSpacing=3D"0" role=3D"presentation" align=3D"center"><tbody>=
+<tr><td><div>0.5.7 px</div><div class=3D"sm_hidden" style=3D"display:block"=
+>Mobile</div><div class=3D"sm_block" style=3D"display:none">Desktop</div><d=
+iv class=3D"sm_bg-blue-500" style=3D"width:100px;height:100px;background-co=
+lor:rgb(239,68,68)"></div></td></tr></tbody></table><!--/$--></body></html>
+----_NmP-68bc332d705074ef-Part_1--
