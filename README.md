@@ -1,5 +1,7 @@
 # React Email Gmail Breakpoints Reproduction
 
+Reproduction of the issue at https://github.com/resend/react-email/issues/2712
+
 This repository demonstrates a regression in `@react-email/components` where media queries break in Gmail desktop between versions 0.5.7 and 1.0.6.
 
 ## The Issue
